@@ -1,0 +1,66 @@
+# C++ build artifacts
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+*.dll
+*.so
+*.pdb
+*.ilk
+*.exp
+*.map
+*.pch
+*.suo
+*.user
+*.sln.docstates
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.VC.opendb
+build/
+out/
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+*.cmake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+Makefile
+*.ninja
+*.ninja_deps
+*.ninja_log
+*.ninja_rules
+*.rsp
+
+# VS Code settings
+.vscode/
+!.vscode/settings.json   # если хочешь оставить только настройки, раскомментируй
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IDE / Editor files
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+*.backup
+
+# Dependencies (если используешь vcpkg, conan и т.п.)
+vcpkg/
+conan/
+build-deps/
