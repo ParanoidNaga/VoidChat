@@ -1,31 +1,31 @@
 #include <iostream>
 #include <string>
+#include <thread>
 
-#include "../legacy/tcp_client.h"
-#include "../legacy/tcp_server.h"
+#include "../network/udp_node.h"
 
-
-
-int main(int argc, const char* argv[]){
-  if(argc < 2){
-    std::cout << "Usage: ./chat [server <port> | client <ip> <port>]\n";
-    return 1;
-  }
-  std::string mode = argv[1];
-
-  if (mode == "server") {
-        if (argc != 3) { std::cerr << "Need port\n"; return 1; }
-        int port = std::stoi(argv[2]);
-        tcp_server_start(port);
-  } else if (mode == "client") {
-        if (argc != 4) { std::cerr << "Need ip and port\n"; return 1; }
-        std::string ip = argv[2];
-        int port = std::stoi(argv[3]);
-        tcp_client_start(ip.c_str(), port);
-    } else {
-        std::cout << "Unknown mode. Later: p2p mode coming...\n";
+int main(int argc, char* argv[]){
+    if (argc != 4) {
+        std::cout << "Usage:\n";
+        std::cout << "  ./chat <listen_port> <peer_ip> <peer_port>\n";
+        return 1;
     }
 
+    int listen_port = std::stoi(argv[1]);
+    std::string peer_ip = argv[2];
+    int peer_port = std::stoi(argv[3]);
 
-  return 0;
+    std::cout << "Starting udp chat...\n";
+    std::cout << "Listening on port " << listen_port << "\n";
+    std::cout << "Sending to " << peer_ip << ":" << peer_port << "\n";
+    std::cout << "Type # to exit\n";
+
+    std::thread recv_thread(udp_listen, listen_port);
+    std::thread send_thread(udp_send_loop, peer_ip, peer_port);
+
+    recv_thread.join();
+    send_thread.join();
+
+    return 0;
 }
+
