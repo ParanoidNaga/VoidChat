@@ -13,8 +13,7 @@ public:
   ~UdpNode();
 
   void listen();
-  void send();
-  void udp_send(const std::string& ip_str, int port, const std::string& message);
+  void send(const std::string& ip_str, int port, const std::string& message);
   
 private:
   int sockfd = -1;

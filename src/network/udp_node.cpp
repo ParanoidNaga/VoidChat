@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <cstring>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -30,7 +29,7 @@ UdpNode::UdpNode(int bind_port) : listen_port(bind_port){
   }
 
   std::cout << "udp node listening on port " << listen_port << "..." << std::endl;
-
+}
   UdpNode::~UdpNode(){
     if(sockfd>=0){
       close(sockfd);
@@ -45,7 +44,7 @@ UdpNode::UdpNode(int bind_port) : listen_port(bind_port){
     sockaddr_in cliaddr{};
     socklen_t len = sizeof(cliaddr);
     
-    std::cout << "udp listening on port " << port << "..." << std::endl;
+    std::cout << "udp listening on port " << listen_port << "..." << std::endl;
 
     while(true){
       int n = recvfrom(sockfd, buffer, MAXLINE, 0, (sockaddr*)& cliaddr, &len);
@@ -77,6 +76,5 @@ UdpNode::UdpNode(int bind_port) : listen_port(bind_port){
     else {
       std::cout << "Sent to " << ip_str << ":" << port << " -> " << message << "\n";
     }
-  }
 };
  

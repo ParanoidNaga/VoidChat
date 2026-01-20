@@ -33,8 +33,9 @@ int main(int argc, char* argv[]) {
     std::cout << "Sending to: " << peer_ip << ":" << peer_port << "\n";
     std::cout << "Type # to exit\n";
 
-    UdpNode node(listen_port);  // один объект → один сокет
+    UdpNode node(listen_port); //i guess here are the objects created, thats kind of cool, becuase there is only one socket created
 
+  
     std::thread recv_thread(&UdpNode::listen, &node);
     std::thread send_thread(send_loop, std::ref(node), peer_ip, peer_port);
 
