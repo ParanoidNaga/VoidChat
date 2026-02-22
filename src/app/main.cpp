@@ -3,6 +3,8 @@
 #include <thread>
 #include "../network/udp_node.h"
 
+#include <sodium.h>
+
 void send_loop(UdpNode& node, const std::string& peer_ip, int peer_port) {
     std::string message;
     std::cout << "Type messages (or # to exit):\n";
@@ -33,7 +35,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Sending to: " << peer_ip << ":" << peer_port << "\n";
     std::cout << "Type # to exit\n";
 
-    UdpNode node(listen_port); //i guess here are the objects created, thats kind of cool, becuase there is only one socket created
+    UdpNode node(listen_port); //i guess here are the objects created, thats kind of cool, because only one socket per device is created
 
   
     std::thread recv_thread(&UdpNode::listen, &node);
